@@ -31,6 +31,41 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   # You need to write this method
+  # .inject { |sum, n| sum + n }
+  # .group_by { |ones| ones }
+  equals1 = 0
+  equals5 = 0
+  equalso = 0
+  equals = dice.sort{|x| x}
+  frequencies = Hash.new(0)
+  equals.select{ |nums| frequencies[nums] += 1}
+  frequencies.each do |a, b|
+    c = b / 3
+    d = b % 3
+    if a == 1
+      if b >= 3
+        equals1 = (c * 1000) + (a * d * 100)
+      else
+        equals1 = 100 * a * d
+      end
+    elsif a == 5
+      if b < 3
+        equals5 = a * d * 10
+      elsif b > 3
+        equals5 = (a * 100) + (a * d * 10)
+      else
+        equals5 = a * 100
+      end
+    else a != 1 and a != 5
+      if b >= 3
+        equalso = (a * 100) + (a * d * 0)
+      else
+        equalso = a * 0
+      end
+    end
+
+  end
+  dice = equals1 + equals5 + equalso
 end
 
 class AboutScoringProject < Neo::Koan
