@@ -5,6 +5,25 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 # class DiceSet
 #   code ...
 # end
+# I copied the whole code in section below from
+# https://github.com/mlsimpson/rubykoans/blob/master/about_dice_project.rb
+class DiceSet
+  attr_reader :values
+  # NOTE:  Here, continuing from the previous module about_classes.rb,
+  # I set an attr_reader.
+  # attr_reader / attr_accessor is always a symbol.
+
+  # roll(x) is the only function to be defined.
+  # it takes in the number of dice to be rolled,
+  # and assigns a random value (from 1 - 6) to each die.
+  def roll(x)
+    @values = (1..x).map{ rand(6) + 1 }
+  end
+  # NOTE:  An @ before a value is an instance variable.
+  # "values" is the instance variable, and it becomes an array during the roll()
+  # function, since it is not typed initially.
+
+end
 
 class AboutDiceProject < Neo::Koan
   def test_can_create_a_dice_set
